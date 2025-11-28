@@ -1,0 +1,20 @@
+name: tree
+version: "1.5.2.2"
+description: "Recursive directory listing command that prints directories as a tree"
+homepage: "https://gnuwin32.sourceforge.net/packages/tree.htm"
+license: "GPL-2.0-or-later"
+
+platforms:
+  - os: windows
+    arch: amd64
+    archive: true
+    url: "https://sourceforge.net/projects/gnuwin32/files/tree/1.5.2.2/tree-1.5.2.2-bin.zip/download"
+
+install:
+  steps:
+    - type: extract
+      to: "{{ .TmpDir }}/tree"
+    
+    - type: copy
+      from: "{{ .TmpDir }}/tree/bin/tree.exe"
+      to: "{{ .BinDir }}/tree.exe"
