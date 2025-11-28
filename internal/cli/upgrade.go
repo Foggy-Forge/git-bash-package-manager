@@ -101,9 +101,10 @@ func newUpgradeCmd() *cobra.Command {
 		}
 
 		// Remove backup
-		_ = os.Remove(backupPath)			fmt.Printf("✓ Successfully upgraded to %s\n", latestVersion)
-			fmt.Println("\nRun 'gbpm version' to verify.")
-			return nil
+		_ = os.Remove(backupPath)
+		fmt.Printf("✓ Successfully upgraded to %s\n", latestVersion)
+		fmt.Println("\nRun 'gbpm version' to verify.")
+		return nil
 		},
 	}
 }
