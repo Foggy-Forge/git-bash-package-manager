@@ -18,8 +18,8 @@ go.work
 vendor/
 
 # Build output
-gbpm
-gbpm.exe
+/gbpm
+/gbpm.exe
 /bin/
 /dist/
 
