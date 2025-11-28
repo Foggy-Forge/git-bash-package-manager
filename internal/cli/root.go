@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	version = "0.0.1"
+	version = "0.1.0"
 )
 
 func Execute() error {
@@ -23,6 +23,10 @@ func newRootCmd() *cobra.Command {
 		newVersionCmd(),
 		newDoctorCmd(),
 		newPathsCmd(),
+		newInstallCmd(),
+		newUninstallCmd(),
+		newListCmd(),
+		newUpdateCmd(),
 	)
 
 	return cmd

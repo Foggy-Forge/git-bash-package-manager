@@ -82,30 +82,39 @@ gbpm doctor
 
 ## Roadmap
 
-### Milestone 0 – Skeleton CLI
+### Milestone 0 – Skeleton CLI ✅
 
 * [x] Basic command scaffold (`version`, `doctor`, `paths`)
 * [x] Paths abstraction (`~/.gbpm`, `bin`, `cache`, `registry`)
 * [x] `go build` + minimal docs
 
-### Milestone 1 – Install from Local Manifest
+### Milestone 1 – Install from Local Manifest ✅
 
-* [ ] Define manifest spec (see `docs/manifest-spec.md`)
-* [ ] Implement `gbpm install --file manifest.yaml`
+* [x] Define manifest spec (see `docs/manifest-spec.md`)
+* [x] Implement `gbpm install --file manifest.yaml`
 
-  * [ ] YAML parsing
-  * [ ] Download to cache
-  * [ ] Extract (zip/tar.gz)
-  * [ ] Copy binary to `~/.gbpm/bin`
-  * [ ] Update `state.json`
+  * [x] YAML parsing
+  * [x] Download to cache
+  * [x] Extract (zip/tar.gz)
+  * [x] Copy binary to `~/.gbpm/bin`
+  * [x] Update `state.json`
 
-### Milestone 2 – Git Registry
+### Milestone 2 – Git Registry ✅
 
 * [x] Create `git-bash-package-manager-registry` repo
-* [ ] Add example manifests (`fzf`, `bat`, `rg`)
-* [ ] Implement `gbpm update` (clone/pull)
-* [ ] Implement `gbpm install <name>` via registry lookup
-* [ ] Implement `gbpm list` and `gbpm uninstall`
+* [x] Implement `gbpm update` (clone/pull)
+* [x] Implement `gbpm install <name>` via registry lookup
+* [x] Implement `gbpm list` and `gbpm uninstall`
+* [ ] Add example manifests (`fzf`, `bat`, `rg`) to registry
+
+### Future Enhancements
+
+* [ ] Checksum verification
+* [ ] `gbpm upgrade` - upgrade all packages
+* [ ] `gbpm info <name>` - show package information
+* [ ] `gbpm search <query>` - search packages
+* [ ] Multiple version support
+* [ ] Dependency management
 
 See more details in [`docs/design.md`](./docs/design.md) and [`docs/manifest-spec.md`](./docs/manifest-spec.md).
 
