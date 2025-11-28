@@ -103,22 +103,36 @@ if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
   echo ""
   echo "⚠️  $BIN_DIR is not in your PATH"
   echo ""
-  echo "Add the following line to your ~/.bashrc or ~/.bash_profile:"
-  echo ""
-  echo "    export PATH=\"$BIN_DIR:\$PATH\""
-  echo ""
   
-  # Offer to add to .bashrc
-  if [ -f "$HOME/.bashrc" ]; then
-    read -p "Would you like to add it to ~/.bashrc now? (y/N) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      echo "" >> "$HOME/.bashrc"
-      echo "# gbpm" >> "$HOME/.bashrc"
-      echo "export PATH=\"$BIN_DIR:\$PATH\"" >> "$HOME/.bashrc"
-      echo "✓ Added to ~/.bashrc"
-      echo "Run: source ~/.bashrc"
+  # Ask user if they want to add to .bashrc
+  read -p "Would you like to add it to your ~/.bashrc now? (y/N) " -n 1 -r
+  echo
+  
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    BASHRC="$HOME/.bashrc"
+    
+    # Create .bashrc if it doesn't exist
+    if [ ! -f "$BASHRC" ]; then
+      echo "Creating ~/.bashrc..."
+      touch "$BASHRC"
     fi
+    
+    # Add PATH export to .bashrc
+    echo "" >> "$BASHRC"
+    echo "# gbpm" >> "$BASHRC"
+    echo "export PATH=\"$BIN_DIR:\$PATH\"" >> "$BASHRC"
+    echo "✓ Added to ~/.bashrc"
+    echo ""
+    echo "Run the following to use gbpm immediately:"
+    echo "    source ~/.bashrc"
+    echo ""
+    echo "Or close and reopen your terminal."
+  else
+    echo ""
+    echo "To add it manually, add this line to your ~/.bashrc or ~/.bash_profile:"
+    echo ""
+    echo "    export PATH=\"$BIN_DIR:\$PATH\""
+    echo ""
   fi
 else
   echo "✓ $BIN_DIR is already in PATH"
