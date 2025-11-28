@@ -93,17 +93,15 @@ func newUpgradeCmd() *cobra.Command {
 				return fmt.Errorf("failed to backup current binary: %w", err)
 			}
 
-			// Move new binary into place
-			if err := os.Rename(tmpPath, exePath); err != nil {
-				// Restore backup on failure
-				os.Rename(backupPath, exePath)
-				return fmt.Errorf("failed to install update: %w", err)
-			}
+		// Move new binary into place
+		if err := os.Rename(tmpPath, exePath); err != nil {
+			// Restore backup on failure
+			_ = os.Rename(backupPath, exePath)
+			return fmt.Errorf("failed to install update: %w", err)
+		}
 
-			// Remove backup
-			os.Remove(backupPath)
-
-			fmt.Printf("✓ Successfully upgraded to %s\n", latestVersion)
+		// Remove backup
+		_ = os.Remove(backupPath)			fmt.Printf("✓ Successfully upgraded to %s\n", latestVersion)
 			fmt.Println("\nRun 'gbpm version' to verify.")
 			return nil
 		},
