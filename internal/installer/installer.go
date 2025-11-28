@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/template"
 	"time"
 
@@ -57,7 +58,15 @@ func (i *Installer) Install(m *manifest.Manifest) error {
 
 	// Download asset
 	cacheDir := filepath.Join(i.Paths.Cache, m.Name, m.Version)
+	
+	// Determine filename - use archive extension if platform says it's an archive
 	filename := filepath.Base(platform.URL)
+	if platform.Archive && !hasArchiveExtension(filename) {
+		// SourceForge and similar may not have extension in URL
+		// Default to .zip for Windows archives
+		filename = m.Name + "-" + m.Version + ".zip"
+	}
+	
 	cachePath := filepath.Join(cacheDir, filename)
 
 	if _, err := os.Stat(cachePath); os.IsNotExist(err) {
@@ -222,4 +231,10 @@ func copyFile(src, dst string) error {
 	}
 
 	return nil
+}
+
+// hasArchiveExtension checks if a filename has a known archive extension
+func hasArchiveExtension(filename string) bool {
+	ext := strings.ToLower(filepath.Ext(filename))
+	return ext == ".zip" || ext == ".tar" || ext == ".gz" || ext == ".tgz"
 }

@@ -1,6 +1,6 @@
 module github.com/Foggy-Forge/git-bash-package-manager
 
-go 1.25.4
+go 1.23
 
 require (
 	github.com/spf13/cobra v1.9.1
